@@ -2,8 +2,6 @@ data = open('Day 2\Data.txt', 'r')
 
 # only 12 red cubes, 13 green cubes, and 14 blue cubes
 #Game 1: 6 green, 3 blue; 3 red, 1 green; 4 green, 3 red, 5 blue
-key = []
-value = []
 cubeBagDict = {"green" : 13, "blue" : 14, "red" : 12}
 Total = 0
 for x in data:
@@ -32,5 +30,5 @@ for x in data:
                 gameState = False
     if gameState == True:
         Total += int(game.split(" ")[1])
-    print(Total)
+print(Total)
 
