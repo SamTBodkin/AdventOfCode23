@@ -5,20 +5,22 @@ with open('Day 2\Data.txt', 'r') as data:
 #Game 1: 6 green, 3 blue; 3 red, 1 green; 4 green, 3 red, 5 blue
 cubeBagDict = {"green" : 13, "blue" : 14, "red" : 12}
 Total = 0
+PowerTotal = 0
 
 for line in lines:
     gameState = True
+    powers = 1
     cubeDict = {"green" : 0, "blue" : 0, "red" : 0}
+    minimum = {"green" : 0, "blue" : 0, "red" : 0}
 
     game, dataRow = line.rstrip().split(":")
     for dataSet in dataRow.split(";"):
         for x in dataSet.split(","):
             _ , value,key = x.split(" ")
             cubeDict[key] = int(value)
-                
-            if not all(cubeDict[key] <= cubeBagDict[key] for key in cubeDict):
-                gameState = False
-                break
-    if gameState:
-        Total += int(game.split(" ")[1])
-print(Total)
+            if minimum[key] < int(value) :
+                minimum[key] = int(value)
+    for key in minimum:
+        powers = (minimum[key]*powers)
+    PowerTotal +=  powers
+print(PowerTotal)
