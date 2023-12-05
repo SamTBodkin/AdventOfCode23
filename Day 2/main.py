@@ -5,29 +5,21 @@ data = open('Day 2\Data.txt', 'r')
 cubeBagDict = {"green" : 13, "blue" : 14, "red" : 12}
 Total = 0
 for x in data:
+    x = x.rstrip()
     gameState = True
     cubeDict = {"green" : 0, "blue" : 0, "red" : 0}
-    x = x.rstrip()
-    # Getting data extracted from the line 
+
     game, dataRow = (x.split(":"))
-    print(game)
-    dataRow = dataRow.split(";")
-    print(dataRow)
+    for dataSet in dataRow.split(";"):
+        for x in dataSet.split(","):
+            _ , value,key = x.split(" ")
+            cubeDict[key] = int(value)
 
-    for x in dataRow:
-        dataSet = x.split(";")
-        for x in dataSet:
-            cubes = x.split(",")
-            for x in cubes:
-                z , value,key = x.split(" ")
-                cubeDict[key] = int(value)
-
-            if((cubeDict["green"] <= cubeBagDict["green"]) & (cubeDict["red"] <= cubeBagDict["red"]) & (cubeDict["blue"] <= cubeBagDict["blue"])):
-                print("Successful Game")
-                pass
-            else:
+            if not all(cubeDict[key] <= cubeBagDict[key] for key in cubeDict):
                 print("Unsuccessful Game")
                 gameState = False
+                break
+
     if gameState == True:
         Total += int(game.split(" ")[1])
 print(Total)
